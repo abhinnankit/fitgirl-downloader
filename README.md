@@ -14,6 +14,13 @@ source venv/bin/activate
 
 pip install -r requirements.txt
 
+### Execute the following to start the Downloads
+
+python3 "[replace/with/url](url) "
+
+For eg:
+python3 https://fuckingfast.co/onohkw5wrswy#God_of_War_Ragnarok_--_fitgirl-repacks.site_--_.part003.rar
+
 ### Deactivate using
 
 Deactivate
