@@ -39,7 +39,7 @@ def wait_for_page_to_load(locator: Tuple[str, str], driver):
     current_time_webdriver = web_driver_clock.strftime("%H:%M:%S")
 
     print("\nTime before waiting for #plaintext button with webdriver=", current_time_webdriver)
-    WebDriverWait(driver, 10, poll_frequency=5).until(ec.presence_of_element_located(locator),
+    WebDriverWait(driver, 10, poll_frequency=5).until(ec.visibility_of_element_located(locator),
                                                       'Timed out waiting for element to appear')
 
     # Get current time stamp after wait
@@ -65,14 +65,14 @@ def wait_for_download_to_finish():
 
 
 def open_page(driver):
+    # Wait for element to appear
+    wait_for_page_to_load((By.ID, 'plaintext'), driver)
+
     # Find all <li> tags and extract the links
     links = []
     li_tags = driver.find_elements(By.CSS_SELECTOR, '#plaintext li')
 
     for li in li_tags:
-        # Wait for element to appear
-        wait_for_page_to_load((By.ID, 'plaintext'), driver)
-
         # Find anchor tags within the <li> and get their href attributes
         a_tag = li.find_element(By.TAG_NAME, 'a')
         link = a_tag.get_attribute('href')
