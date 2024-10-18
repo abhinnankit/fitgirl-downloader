@@ -20,14 +20,13 @@ Mac - python3 -m venv .venv
 
 Windows - python -m venv .venv
 
-
 ### Activate venv
 
 Mac - source .venv/bin/activate
 
-Windows -  .\\.venv\Scripts\Activate.ps1
+Windows - .\\.venv\Scripts\Activate.ps1
 
-If you are unable to run the above command in Pwershell/Terminal on Windows because of execution policy error. Refer: https://learn.microsoft.com/en-gb/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.4
+If you are unable to run the above command in Powershell/Terminal on Windows because of execution policy error. Refer: https://learn.microsoft.com/en-gb/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.4
 
 ### Install the dependencies using
 
