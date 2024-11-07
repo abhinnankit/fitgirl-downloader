@@ -115,6 +115,8 @@ def main(url=None):
 
     open_page(driver)
     
+    # Sleep for 10 seconds to let chrome build the download file
+    time.sleep(10)
     print("\nAll files have been downloaded...\nClosing browser...")
     # Close the main browser window after processing all links
     driver.quit()
