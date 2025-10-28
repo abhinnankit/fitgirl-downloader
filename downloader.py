@@ -1,10 +1,12 @@
 from typing import Tuple
 
+from datetime import datetime
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
-from datetime import datetime
+from webdriver_manager.chrome import ChromeDriverManager
 
 import time
 import sys
@@ -13,20 +15,27 @@ import os
 WEBSITE_URL = 'https://paste.fitgirl-repacks.site/?2d25d933656bc78a#6vZZAEdL8nYvhxN5Vji88SNLAkBEHhtXEUfQquPQ6Rw2'
 DOWNLOAD_DIR = '/Users/abhinnankit/Downloads' # Update downloads directory path where the files are going to be downloaded
 
+def get_or_install_chromedriver():
+    # Install and set up the Chrome WebDriver
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service)
+    return driver
+
 
 def launch_chrome(url):
     # Set up the WebDriver (Ensure that the path to your webdriver is correct)
-    ch_options = webdriver.ChromeOptions()
-    lt_options = {"build": "Build: FuckingFast link downloader",
-                  "project": "Project: FuckingFast link downloader",
-                  "name": "Test: FuckingFast link downloader", "browserName": "Chrome",
-                  "browserVersion": "latest", "platformName": "Windows 11", "console": "error", "w3c": (True,),
-                  "headless": False, "network": (True,), "video": (True,), "visual": True}
+    # ch_options = webdriver.ChromeOptions()
+    # lt_options = {"build": "Build: FuckingFast link downloader",
+    #               "project": "Project: FuckingFast link downloader",
+    #               "name": "Test: FuckingFast link downloader", "browserName": "Chrome",
+    #               "browserVersion": "latest", "platformName": "Windows 11", "console": "error", "w3c": (True,),
+    #               "headless": False, "network": (True,), "video": (True,), "visual": True}
 
-    ch_options.set_capability('LT:Options', lt_options)
+    # ch_options.set_capability('LT:Options', lt_options)
 
     # Open the desired website
-    driver = webdriver.Chrome(options=ch_options)
+    # driver = webdriver.Chrome(options=ch_options)
+    driver = get_or_install_chromedriver()
     driver.get(url)
     driver.maximize_window()
 
@@ -40,7 +49,7 @@ def wait_for_page_to_load(locator: Tuple[str, str], driver):
 
     print("\nTime before waiting for #plaintext button with webdriver=", current_time_webdriver)
     WebDriverWait(driver, 10, poll_frequency=5).until(ec.visibility_of_element_located(locator),
-                                                      'Timed out waiting for element to appear')
+                                                    'Timed out waiting for element to appear')
 
     # Get current time stamp after wait
     element_found = datetime.now()

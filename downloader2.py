@@ -1,11 +1,12 @@
 from typing import Tuple
 
+from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
-from datetime import datetime
+from webdriver_manager.chrome import ChromeDriverManager
 
 import time
 import sys
@@ -14,12 +15,18 @@ import os
 WEBSITE_URL = 'https://paste.fitgirl-repacks.site/?2d25d933656bc78a#6vZZAEdL8nYvhxN5Vji88SNLAkBEHhtXEUfQquPQ6Rw2'
 DOWNLOAD_DIR = 'C:\\Users\\abhin\\Downloads' # Update downloads directory path where the files are going to be downloaded
 
+def get_or_install_chromedriver():
+    # Install and set up the Chrome WebDriver
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service)
+    return driver
 
 def launch_chrome(url):
     # Set up the WebDriver (Ensure that the path to your webdriver is correct)
-    service = Service(executable_path="chromedriver.exe")
+    # service = Service(executable_path="chromedriver.exe")
     # Open the desired website
-    driver = webdriver.Chrome(service=service)
+    # driver = webdriver.Chrome(service=service)
+    driver = get_or_install_chromedriver()
     driver.maximize_window()
     driver.get(url)
 
